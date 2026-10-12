@@ -7,3 +7,4 @@ class CodeIssue:
     message: str
     severity: str
     line: int | None = None
+    suggestion: str | None = None

@@ -91,3 +91,65 @@ def add(a, b):
     assert len(
         analyze_python_code(code)
     ) == 0
+
+
+def test_detects_subprocess_shell():
+    code = """
+import subprocess
+subprocess.run(command, shell=True)
+"""
+
+    assert (
+        "subprocess-shell"
+        in get_rules(code)
+    )
+
+
+def test_detects_open_without_context():
+    code = """
+file = open("data.txt")
+content = file.read()
+"""
+
+    assert (
+        "open-without-context"
+        in get_rules(code)
+    )
+
+
+def test_safe_open_with_context():
+    code = """
+with open("data.txt") as file:
+    content = file.read()
+"""
+
+    assert (
+        "open-without-context"
+        not in get_rules(code)
+    )
+
+
+def test_detects_sql_interpolation():
+    code = """
+cursor.execute(
+    f"SELECT * FROM users WHERE id = {user_id}"
+)
+"""
+
+    assert (
+        "sql-string-building"
+        in get_rules(code)
+    )
+
+
+def test_detects_unused_import():
+    code = """
+import os
+
+value = 10
+"""
+
+    assert (
+        "unused-import"
+        in get_rules(code)
+    )
