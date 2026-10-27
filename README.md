@@ -178,6 +178,9 @@ Or on Windows:
 ### Code Review Application
 
 ![Code Review Application](docs/screenshots/code-review-app.png)
+![Code Review Application](docs/screenshots/code-review-app2.png)
+![Code Review Application](docs/screenshots/code-review-app3.png)
+![Code Review Application](docs/screenshots/code-review-app4.png)
 
 ## Example Report
 
